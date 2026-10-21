@@ -1,4 +1,4 @@
-# Module 04 — CRUD через Spring Data
+# Module 03 — Практичне 1.3: CRUD через Spring Data
 
 Тепер навчимо застосунок **створювати, читати, оновлювати й видаляти** товари
 (англ. **CRUD** — Create, Read, Update, Delete) через REST API. Побачимо, як мало коду
@@ -12,7 +12,7 @@
 - Звіряти кожну операцію з її **SQL** у логах.
 
 ## Передумови
-- Пройдений [module-03](../module-03-first-entity/): є сутність `Product` і робочий проєкт.
+- Пройдений [module-02](../module-02-first-entity/): є сутність `Product` і робочий проєкт.
 
 ---
 
@@ -63,7 +63,7 @@ Controller (HTTP)  →  Service (логіка, транзакції)  →  Repos
 Навіщо так:
 - клієнт не задає `id` (його проставляє база);
 - вхідні дані валідуються (`@NotBlank`, `@PositiveOrZero`) окремо від моделі БД;
-- сутність не «витікає» назовні — у [module-05](../module-05-associations/) це врятує нас
+- сутність не «витікає» назовні — у [module-04](../module-04-associations/) це врятує нас
   від `LazyInitializationException` та нескінченної JSON-рекурсії при звʼязках.
 
 ---
@@ -116,10 +116,10 @@ curl -s -o /dev/null -w "%{http_code}\n" -X DELETE http://localhost:8080/api/pro
 > **Важлива деталь про `UPDATE`.** У методі `update` ми **не викликаємо** `save()`. Поки код
 > виконується всередині `@Transactional`, завантажений обʼєкт «керований» (managed), і Hibernate
 > сам помічає зміну полів (**dirty checking**) та генерує `UPDATE` при завершенні транзакції.
-> Це поведінку детально розберемо в [module-05](../module-05-associations/).
+> Це поведінку детально розберемо в [module-04](../module-04-associations/).
 
 Порівняйте ці запити з тими, що ви писали **руками** в
-[module-01](../module-01-sql-by-hand/) (`03-select-basics.sql`). Це той самий SQL —
+[module-01](../module-01-rdb-jdbc-orm/) (`03-select-basics.sql`). Це той самий SQL —
 тільки тепер його пише Hibernate.
 
 ---
@@ -174,6 +174,6 @@ curl -s -o /dev/null -w "%{http_code}\n" -X DELETE http://localhost:8080/api/pro
 
 ## Що далі
 
-У **[module-05-associations](../module-05-associations/)** додамо решту сутностей
+У **[module-04-associations](../module-04-associations/)** додамо решту сутностей
 (`Category`, `Customer`, `Order`, `OrderItem`) і **звʼязки** між ними, розберемо
 **сесію**, **життєвий цикл сутності** та **транзакції** глибше.

@@ -1,4 +1,4 @@
-# Module 03 — Перша сутність `@Entity`
+# Module 02 — Групове 1.3: Перша сутність `@Entity`
 
 Час від SQL та теорії перейти до робочого коду. Створимо справжній **Spring Boot** проєкт
 і першу сутність — `Product`. Запустимо застосунок, і **Hibernate сам згенерує `CREATE TABLE`**.
@@ -12,14 +12,14 @@
 
 ## Передумови
 - Пройдені [module-00](../module-00-setup/) (встановлено JDK 17, Docker, IntelliJ)
-  та [module-02](../module-02-jdbc-orm/) (розуміння зʼєднання/транзакції/ролі ORM).
+  та [module-01](../module-01-rdb-jdbc-orm/) (розуміння зʼєднання/транзакції/ролі ORM).
 
 ---
 
 ## 1. Структура проєкту
 
 ```
-module-03-first-entity/
+module-02-first-entity/
 ├─ pom.xml                                   залежності та версії (через Spring Boot parent)
 ├─ docker-compose.yml                        база PostgreSQL
 └─ src/main/
@@ -79,7 +79,7 @@ logging:
 
 > **`ddl-auto: create`** зручний на старті: база завжди «чиста» під поточні сутності.
 > Але він **стирає дані** при кожному запуску й непридатний для продакшну. У
-> [module-07](../module-07-liquibase-nplus1/) замінимо його на Liquibase.
+> [module-06](../module-06-liquibase-nplus1/) замінимо його на Liquibase.
 
 ---
 
@@ -159,7 +159,7 @@ create table products (
 | `@Column(precision = 12, scale = 2)` на `price` | `price numeric(12,2) not null` | грошовий тип |
 | `@Column(nullable = false)` на `quantity` | `quantity integer not null` | `Integer` → `integer` |
 
-Порівняйте це з файлом `01-create-tables.sql` із [module-01](../module-01-sql-by-hand/):
+Порівняйте це з файлом `01-create-tables.sql` із [module-01](../module-01-rdb-jdbc-orm/):
 таблицю `products` ми там писали руками — тепер її згенерувала JPA з анотацій.
 **Той самий результат, лише джерело різне.**
 
@@ -203,6 +203,6 @@ create table products (
 
 ## Що далі
 
-У **[module-04-crud-product](../module-04-crud-product/)** навчимо застосунок
+У **[module-03-crud-product](../module-03-crud-product/)** навчимо застосунок
 створювати, читати, оновлювати й видаляти товари через REST — і побачимо, який SQL
 Hibernate генерує для кожної з цих операцій.

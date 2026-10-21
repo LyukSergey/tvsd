@@ -4,6 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!--
+      Spring Boot "батьківський" POM фіксує узгоджені між собою версії всіх залежностей
+      (Hibernate, драйвер, Liquibase тощо). Тому в залежностях нижче версії НЕ вказуємо —
+      їх підставить Spring Boot. Це головний запобіжник проти "конфлікту версій".
+    -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -12,7 +17,7 @@
     </parent>
 
     <groupId>com.shop</groupId>
-    <artifactId>module-06-queries</artifactId>
+    <artifactId>module-02-first-entity</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
@@ -21,19 +26,20 @@
     </properties>
 
     <dependencies>
+        <!-- Spring Data JPA + Hibernate: усе для роботи з БД через ORM. -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+
+        <!-- Драйвер PostgreSQL (підключення до нашої бази в Docker). -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- Lombok: прибирає рутину (getter/setter/конструктори) через анотації. -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

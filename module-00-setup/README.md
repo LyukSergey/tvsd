@@ -113,18 +113,18 @@ Docker Compose version v2.28.1
 
 ## 4. Середовище розробки — IntelliJ IDEA
 
-Для модулів із Java-кодом (починаючи з `module-03`) знадобиться IDE.
+Для модулів із Java-кодом (починаючи з `module-02`) знадобиться IDE.
 
 1. Завантажте **IntelliJ IDEA Community Edition** (безкоштовна):
    https://www.jetbrains.com/idea/download/
 2. Встановіть і запустіть.
-3. Відкрийте теку модуля: **File → Open** → оберіть теку, наприклад `module-03-first-entity`
+3. Відкрийте теку модуля: **File → Open** → оберіть теку, наприклад `module-02-first-entity`
    (ту, де лежить `pom.xml`). IntelliJ сам розпізнає Maven-проєкт і підтягне залежності.
 4. Переконайтеся, що обрано **JDK 17**: **File → Project Structure → Project → SDK → 17**.
    Якщо 17 немає у списку — натисніть **Add SDK → Download JDK → Version 17**.
 
-> Модулі `module-01` (SQL) і `module-02` (теорія) IDE не потребують — достатньо Docker
-> і клієнта бази.
+> Частина A модуля `module-01` (SQL руками) IDE не потребує — достатньо Docker і клієнта
+> бази. IDE знадобиться з частини B (JDBC-демо) та в наступних модулях.
 
 ---
 
@@ -162,8 +162,8 @@ cd tvsd
 tvsd/
 ├─ README.md               ← загальний опис курсу (почніть із нього)
 ├─ module-00-setup/        ← ви тут
-├─ module-01-sql-by-hand/
-├─ module-02-jdbc-orm/
+├─ module-01-rdb-jdbc-orm/
+├─ module-02-first-entity/
 └─ ...
 ```
 
@@ -277,6 +277,6 @@ binding parameter [1] as [BIGINT] - [42]
 
 ## Що далі
 
-Переходьте до **[module-01-sql-by-hand](../module-01-sql-by-hand/)** — почнемо працювати
+Переходьте до **[module-01-rdb-jdbc-orm](../module-01-rdb-jdbc-orm/)** — почнемо працювати
 з базою напряму мовою SQL: створимо таблиці, наповнимо їх і навчимося писати запити,
 включно з агрегацією через `GROUP BY`.

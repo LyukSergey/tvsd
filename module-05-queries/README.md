@@ -1,4 +1,4 @@
-# Module 06 — Запити у Spring Data (включно з GROUP BY)
+# Module 05 — Групове 2.2: Запити у Spring Data (включно з GROUP BY)
 
 Тепер, коли є повна модель зі звʼязками, навчимося **вибирати дані різними способами**:
 від методів, які Spring будує з назви, до JPQL, нативного SQL, проєкцій, пагінації
@@ -13,8 +13,8 @@
 - Писати **агрегації**: `COUNT`, `AVG`, **`GROUP BY`**, **`HAVING`** — через JPQL.
 
 ## Передумови
-- Пройдений [module-05](../module-05-associations/): є всі сутності та звʼязки.
-- Корисно тримати поруч `04-group-by.sql` із [module-01](../module-01-sql-by-hand/) для звірки.
+- Пройдений [module-04](../module-04-associations/): є всі сутності та звʼязки.
+- Корисно тримати поруч `04-group-by.sql` із [module-01](../module-01-rdb-jdbc-orm/) для звірки.
 
 ---
 
@@ -125,7 +125,7 @@ having count(p1_0.id) > ?
 order by count(p1_0.id) desc
 ```
 
-Порівняйте це з `04-group-by.sql` із [module-01](../module-01-sql-by-hand/) — **той самий SQL**.
+Порівняйте це з `04-group-by.sql` із [module-01](../module-01-rdb-jdbc-orm/) — **той самий SQL**.
 Різниця лише в тому, що тепер ми описали його мовою JPQL (по сутностях), а Hibernate
 переклав у SQL.
 
@@ -208,7 +208,7 @@ curl -s "http://localhost:8080/api/query/page?price=0&size=3"
 
 ## Що далі
 
-У **[module-07-liquibase-nplus1](../module-07-liquibase-nplus1/)** замінимо автоматичне
+У **[module-06-liquibase-nplus1](../module-06-liquibase-nplus1/)** замінимо автоматичне
 створення схеми (`ddl-auto`) на **Liquibase** (міграції як код) і розберемо найвідомішу
 пастку ORM — проблему **N+1**: відтворимо її на `Order → OrderItems` і усунемо через
 `JOIN FETCH` / `@EntityGraph`, підтвердивши зниження кількості запитів у логах.

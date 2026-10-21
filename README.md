@@ -34,16 +34,19 @@ Product  N >──< N Order           «багато-до-багатьох» ч�
 Кожен модуль — **окрема самодостатня тека**: методичка (`README.md`) + код/скрипти.
 Модулі можна відкривати й запускати незалежно один від одного.
 
-| Модуль | Тема | Що всередині |
-|---|---|---|
-| [`module-00-setup`](module-00-setup/)           | Підготовка середовища | Встановлення JDK, Docker, IDE; як отримати код; як читати лог Hibernate |
-| [`module-01-sql-by-hand`](module-01-sql-by-hand/) | SQL руками | `CREATE TABLE`, `INSERT`, `SELECT`, `JOIN`, `GROUP BY` — без Java |
-| [`module-02-jdbc-orm`](module-02-jdbc-orm/)       | JDBC vs ORM | З'єднання, сесія, транзакція, зв'язки; навіщо потрібен ORM |
-| [`module-03-first-entity`](module-03-first-entity/) | Перша `@Entity` | Перша сутність `Product`; анотація → `CREATE TABLE` |
-| [`module-04-crud-product`](module-04-crud-product/) | CRUD | Репозиторій, сервіс, REST-контролер, DTO |
-| [`module-05-associations`](module-05-associations/) | Асоціації | Зв'язки між сутностями, життєвий цикл, транзакції |
-| [`module-06-queries`](module-06-queries/)         | Запити | derived-методи, JPQL, `@Query`, проєкції, пагінація, `GROUP BY` |
-| [`module-07-liquibase-nplus1`](module-07-liquibase-nplus1/) | Liquibase + N+1 | Версіонування схеми; діагностика й усунення проблеми N+1 |
+Курс складається з **6 занять** (відповідно до програми дисципліни) — одне заняття = один
+модуль. Окремо є нульовий модуль `module-00-setup` для підготовки середовища (це не заняття,
+а разова інструкція зі встановлення).
+
+| Модуль | Заняття | Тема | Що всередині |
+|---|---|---|---|
+| [`module-00-setup`](module-00-setup/) | — | Підготовка середовища | Встановлення JDK, Docker, IDE; як отримати код; як читати лог Hibernate |
+| [`module-01-rdb-jdbc-orm`](module-01-rdb-jdbc-orm/) | **Лекція 1.1** | Реляційні БД, JDBC та ORM | SQL руками (`CREATE/INSERT/SELECT/JOIN/GROUP BY`) + JDBC vs ORM, зʼєднання, сесія, транзакція |
+| [`module-02-first-entity`](module-02-first-entity/) | **Групове 1.3** | Перша `@Entity`, аналіз SQL | Перша сутність `Product`; анотація → `CREATE TABLE` |
+| [`module-03-crud-product`](module-03-crud-product/) | **Практичне 1.3** | CRUD через Spring Data | Репозиторій, сервіс, REST-контролер, DTO |
+| [`module-04-associations`](module-04-associations/) | **Лекція 2.1** | Асоціації, життєвий цикл, транзакції | Звʼязки між сутностями, Persistence Context, LAZY/EAGER |
+| [`module-05-queries`](module-05-queries/) | **Групове 2.2** | Запити у Spring Data | derived-методи, JPQL, `@Query`, проєкції, пагінація, `GROUP BY` |
+| [`module-06-liquibase-nplus1`](module-06-liquibase-nplus1/) | **Практичне 2.3** | Liquibase + N+1 | Версіонування схеми; діагностика й усунення проблеми N+1 |
 
 > Рекомендований порядок проходження — зверху вниз. Кожен наступний модуль спирається
 > на розуміння, здобуте в попередніх, але код у кожній теці — повний і самостійний.
@@ -53,7 +56,7 @@ Product  N >──< N Order           «багато-до-багатьох» ч�
 ## З чого почати
 
 1. Пройдіть **[module-00-setup](module-00-setup/)** — встановіть усе потрібне й перевірте версії.
-2. Переходьте до **[module-01-sql-by-hand](module-01-sql-by-hand/)** — тут починається робота з базою.
+2. Переходьте до **[module-01-rdb-jdbc-orm](module-01-rdb-jdbc-orm/)** — тут починається робота з базою.
 
 ---
 

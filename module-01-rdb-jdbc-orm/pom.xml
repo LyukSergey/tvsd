@@ -10,7 +10,7 @@
       драйвер PostgreSQL.
     -->
     <groupId>com.shop</groupId>
-    <artifactId>module-02-jdbc-orm</artifactId>
+    <artifactId>module-01-rdb-jdbc-orm</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
