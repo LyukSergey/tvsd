@@ -1,0 +1,26 @@
+# База PostgreSQL для модуля 02. Ідентична еталонній з module-00.
+#
+# Запуск:   docker compose up -d
+# Зупинка:  docker compose down
+# Скидання: docker compose down -v
+
+services:
+  db:
+    image: postgres:16
+    container_name: shop-postgres
+    environment:
+      POSTGRES_DB: shop
+      POSTGRES_USER: shop
+      POSTGRES_PASSWORD: shop
+    ports:
+      - "5432:5432"
+    volumes:
+      - shop-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shop -d shop"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  shop-pgdata:

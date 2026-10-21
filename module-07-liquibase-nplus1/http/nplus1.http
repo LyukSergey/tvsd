@@ -1,0 +1,14 @@
+### Спостереження за проблемою N+1.
+### Після КОЖНОГО запиту подивіться в консоль застосунку і порахуйте рядки
+### "Hibernate: select ... from order_items".
+
+@host = http://localhost:8080
+
+### ПОГАНО: 1 запит на замовлення + по одному на позиції кожного = 1 + N
+GET {{host}}/api/nplus1/naive
+
+### ДОБРЕ: один запит із JOIN FETCH
+GET {{host}}/api/nplus1/join-fetch
+
+### ДОБРЕ: один запит через @EntityGraph
+GET {{host}}/api/nplus1/entity-graph

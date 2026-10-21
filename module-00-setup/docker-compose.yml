@@ -1,0 +1,27 @@
+# Еталонний docker-compose для всього курсу.
+# Піднімає одну базу PostgreSQL 16, доступну на localhost:5432.
+#
+# Запуск:   docker compose up -d
+# Зупинка:  docker compose down        (дані зберігаються)
+# Скидання: docker compose down -v     (дані видаляються повністю)
+
+services:
+  db:
+    image: postgres:16            # офіційний образ PostgreSQL версії 16
+    container_name: shop-postgres
+    environment:
+      POSTGRES_DB: shop           # назва бази, що створиться автоматично
+      POSTGRES_USER: shop         # користувач
+      POSTGRES_PASSWORD: shop     # пароль (для навчання — простий)
+    ports:
+      - "5432:5432"               # проброс порту: localhost:5432 -> контейнер:5432
+    volumes:
+      - shop-pgdata:/var/lib/postgresql/data   # тут PostgreSQL зберігає файли бази
+    healthcheck:                  # Docker перевірятиме, що база готова приймати з'єднання
+      test: ["CMD-SHELL", "pg_isready -U shop -d shop"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  shop-pgdata:                    # іменований volume; живе, доки не зробити down -v

@@ -1,0 +1,58 @@
+### Перевірка CRUD для товарів.
+# Відкрийте цей файл в IntelliJ IDEA і натискайте "Run" (▶) над кожним запитом.
+# Або виконайте ті самі запити в Postman / curl.
+# Запити йдуть по порядку: створити -> прочитати -> оновити -> видалити.
+
+@host = http://localhost:8080
+
+### 1. Створити товар (POST) -> очікуємо 201 Created
+POST {{host}}/api/products
+Content-Type: application/json
+
+{
+  "name": "iPhone 15",
+  "price": 999.00,
+  "quantity": 10
+}
+
+### 2. Створити ще один
+POST {{host}}/api/products
+Content-Type: application/json
+
+{
+  "name": "MacBook Air",
+  "price": 1199.00,
+  "quantity": 5
+}
+
+### 3. Отримати всі товари (GET) -> 200, масив із двох товарів
+GET {{host}}/api/products
+
+### 4. Отримати один товар за id (GET) -> 200
+GET {{host}}/api/products/1
+
+### 5. Оновити товар (PUT) -> 200, нова ціна й кількість
+PUT {{host}}/api/products/1
+Content-Type: application/json
+
+{
+  "name": "iPhone 15",
+  "price": 949.00,
+  "quantity": 8
+}
+
+### 6. Видалити товар (DELETE) -> 204 No Content
+DELETE {{host}}/api/products/2
+
+### 7. Запит неіснуючого товару -> 404 Not Found
+GET {{host}}/api/products/999
+
+### 8. Невалідні дата (порожнє ім'я, від'ємна ціна) -> 400 Bad Request
+POST {{host}}/api/products
+Content-Type: application/json
+
+{
+  "name": "",
+  "price": -5,
+  "quantity": 1
+}

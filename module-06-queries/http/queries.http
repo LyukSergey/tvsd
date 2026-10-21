@@ -1,0 +1,25 @@
+### Демонстрація способів запитів. Запускайте по порядку і дивіться,
+### який SQL генерується в консолі застосунку (SQL-місток).
+
+@host = http://localhost:8080
+
+### Derived: товари дорожчі за 500
+GET {{host}}/api/query/expensive?price=500
+
+### Derived: пошук за частиною назви (ignore case)
+GET {{host}}/api/query/search?q=phone
+
+### JPQL: товари категорії Phones
+GET {{host}}/api/query/by-category?name=Phones
+
+### Проєкція: прайс-лист (назва + ціна), select name, price
+GET {{host}}/api/query/price-list
+
+### GROUP BY: статистика по категоріях, лише групи з > 2 товарами
+GET {{host}}/api/query/category-stats?min=2
+
+### GROUP BY: статистика по ВСІХ категоріях (min=0)
+GET {{host}}/api/query/category-stats?min=0
+
+### Пагінація: перша сторінка (3 шт.) товарів дорожчих за 0, за ціною спадання
+GET {{host}}/api/query/page?price=0&pageNum=0&size=3

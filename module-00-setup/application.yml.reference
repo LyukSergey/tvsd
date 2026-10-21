@@ -1,0 +1,31 @@
+# Еталонний application.yml для модулів із Spring Boot (03-06).
+# Це довідковий файл; у кожному модулі з кодом лежить своя копія в src/main/resources/application.yml.
+#
+# Профіль із Liquibase (модуль 07) відрізняється: ddl-auto стає validate,
+# а схему створює Liquibase — див. module-07.
+
+spring:
+  datasource:
+    # Параметри збігаються з docker-compose.yml:
+    url: jdbc:postgresql://localhost:5432/shop   # jdbc:postgresql://<host>:<port>/<db>
+    username: shop
+    password: shop
+
+  jpa:
+    hibernate:
+      # ddl-auto керує тим, чи створює Hibernate схему автоматично:
+      #   create   - перестворює таблиці при кожному старті (зручно на початку)
+      #   update   - намагається «догнати» схему під сутності (небезпечно в проді)
+      #   validate - лише перевіряє відповідність (використовуємо з Liquibase)
+      #   none     - нічого не робить
+      ddl-auto: create
+    show-sql: true                 # друкувати згенерований SQL у консоль
+    properties:
+      hibernate:
+        format_sql: true           # форматувати SQL читабельно
+        # Діалект зазвичай визначається автоматично; вказувати явно не обов'язково.
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG              # текст SQL-запитів
+    org.hibernate.orm.jdbc.bind: TRACE   # значення параметрів замість "?"

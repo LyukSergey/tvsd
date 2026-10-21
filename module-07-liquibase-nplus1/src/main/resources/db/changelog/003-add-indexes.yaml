@@ -1,0 +1,32 @@
+# ChangeSet 003: індекси на зовнішні ключі.
+# Індекс пришвидшує пошук/JOIN за цими стовпцями (напр. "усі позиції замовлення").
+databaseChangeLog:
+  - changeSet:
+      id: 003-index-orders-customer
+      author: course
+      changes:
+        - createIndex:
+            tableName: orders
+            indexName: idx_orders_customer_id
+            columns:
+              - column:
+                  name: customer_id
+      rollback:
+        - dropIndex:
+            tableName: orders
+            indexName: idx_orders_customer_id
+
+  - changeSet:
+      id: 003-index-order-items-order
+      author: course
+      changes:
+        - createIndex:
+            tableName: order_items
+            indexName: idx_order_items_order_id
+            columns:
+              - column:
+                  name: order_id
+      rollback:
+        - dropIndex:
+            tableName: order_items
+            indexName: idx_order_items_order_id

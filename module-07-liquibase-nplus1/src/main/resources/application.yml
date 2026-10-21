@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/shop
+    username: shop
+    password: shop
+
+  jpa:
+    hibernate:
+      # validate: Hibernate НЕ створює і НЕ змінює схему — лише ПЕРЕВІРЯЄ,
+      # що наявні таблиці відповідають сутностям. Джерело істини тепер — Liquibase.
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  liquibase:
+    # Головний файл-журнал змін. Liquibase застосує всі changeSets при старті.
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE

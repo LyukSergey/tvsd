@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    # Параметри збігаються з docker-compose.yml:
+    url: jdbc:postgresql://localhost:5432/shop   # jdbc:postgresql://<host>:<port>/<db>
+    username: shop
+    password: shop
+
+  jpa:
+    hibernate:
+      # ddl-auto=create: при КОЖНОМУ старті Hibernate перестворює таблиці під наші @Entity.
+      # Зручно на початку навчання (завжди чиста схема), але НЕ для продакшну —
+      # у модулі 07 перейдемо на Liquibase.
+      ddl-auto: create
+    show-sql: true                 # друкувати згенерований SQL у консоль
+    properties:
+      hibernate:
+        format_sql: true           # форматувати SQL читабельно (з переносами)
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG              # текст SQL-запитів
+    org.hibernate.orm.jdbc.bind: TRACE   # значення параметрів замість "?"
