@@ -25,7 +25,7 @@ import java.sql.SQLException;
 public class JdbcDemo {
 
     // Ті самі параметри, що в docker-compose.yml.
-    private static final String URL = "jdbc:postgresql://localhost:5432/shop";
+    private static final String URL = "jdbc:postgresql://localhost:5438/shop";
     private static final String USER = "shop";
     private static final String PASSWORD = "shop";
 
@@ -40,10 +40,8 @@ public class JdbcDemo {
     }
 
     /**
-     * Прочитати один товар за id. Зверніть увагу, СКІЛЬКИ коду потрібно
-     * для одного простого SELECT: відкрити зʼєднання, підготувати запит,
-     * підставити параметр, пройтись по ResultSet, ВРУЧНУ перекласти кожен
-     * стовпець у поле обʼєкта, і все це — акуратно закрити.
+     * Прочитати один товар за id. Зверніть увагу, СКІЛЬКИ коду потрібно для одного простого SELECT: відкрити зʼєднання, підготувати запит,
+     * підставити параметр, пройтись по ResultSet, ВРУЧНУ перекласти кожен стовпець у поле обʼєкта, і все це — акуратно закрити.
      */
     static Product findProductById(long id) throws SQLException {
         String sql = "SELECT id, name, price, quantity FROM products WHERE id = ?";
@@ -53,7 +51,7 @@ public class JdbcDemo {
         // ходять запити. Його відкриття коштує дорого, тому в реальних застосунках
         // зʼєднання тримають у пулі (connection pool) і перевикористовують.
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setLong(1, id);                 // підставляємо значення замість "?"
 
@@ -75,11 +73,10 @@ public class JdbcDemo {
     }
 
     /**
-     * Створити замовлення й одразу додати до нього позицію — ДВА INSERT,
-     * які мають виконатись РАЗОМ або не виконатись зовсім.
+     * Створити замовлення й одразу додати до нього позицію — ДВА INSERT, які мають виконатись РАЗОМ або не виконатись зовсім.
      * <p>
-     * Це і є ТРАНЗАКЦІЯ. Якщо після створення замовлення другий крок впаде,
-     * ми робимо rollback — і в базі не лишається "напівзамовлення" без позицій.
+     * Це і є ТРАНЗАКЦІЯ. Якщо після створення замовлення другий крок впаде, ми робимо rollback — і в базі не лишається "напівзамовлення"
+     * без позицій.
      */
     static void createOrderWithItem() throws SQLException {
         Connection conn = null;
@@ -103,7 +100,7 @@ public class JdbcDemo {
 
             // Крок 2: позиція замовлення — 1 шт. товару 1 за ціною 999.00.
             String insertItem =
-                "INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (?, ?, ?, ?)";
+                    "INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (?, ?, ?, ?)";
             try (PreparedStatement ps = conn.prepareStatement(insertItem)) {
                 ps.setLong(1, orderId);
                 ps.setLong(2, 1L);
@@ -132,8 +129,11 @@ public class JdbcDemo {
         }
     }
 
-    /** Простий носій даних для рядка з products (у "великому" коді це була б @Entity). */
+    /**
+     * Простий носій даних для рядка з products (у "великому" коді це була б @Entity).
+     */
     static class Product {
+
         long id;
         String name;
         BigDecimal price;
