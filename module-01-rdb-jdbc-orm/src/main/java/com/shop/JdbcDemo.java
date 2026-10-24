@@ -29,10 +29,10 @@ public class JdbcDemo {
     private static final String USER = "shop";
     private static final String PASSWORD = "shop";
 
-    public static void main(String[] args) throws SQLException {
-        System.out.println("=== 1. Читання одного товару через JDBC ===");
-        Product product = findProductById(1L);
-        System.out.println("Знайдено: " + product);
+    public static void main(String[] args) throws Exception {
+//        System.out.println("=== 1. Читання одного товару через JDBC ===");
+//        Product product = findProductById(1L);
+//        System.out.println("Знайдено: " + product);
 
         System.out.println();
         System.out.println("=== 2. Транзакція: створення замовлення з двох кроків ===");
@@ -78,7 +78,7 @@ public class JdbcDemo {
      * Це і є ТРАНЗАКЦІЯ. Якщо після створення замовлення другий крок впаде, ми робимо rollback — і в базі не лишається "напівзамовлення"
      * без позицій.
      */
-    static void createOrderWithItem() throws SQLException {
+    static void createOrderWithItem() throws Exception {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -98,6 +98,11 @@ public class JdbcDemo {
                 }
             }
 
+            final String price = "1001.00";
+            if (Double.parseDouble(price) > 1000) {
+                throw new RuntimeException("error");
+            }
+
             // Крок 2: позиція замовлення — 1 шт. товару 1 за ціною 999.00.
             String insertItem =
                     "INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES (?, ?, ?, ?)";
@@ -105,7 +110,7 @@ public class JdbcDemo {
                 ps.setLong(1, orderId);
                 ps.setLong(2, 1L);
                 ps.setInt(3, 1);
-                ps.setBigDecimal(4, new BigDecimal("999.00"));
+                ps.setBigDecimal(4, new BigDecimal(price));
                 ps.executeUpdate();
             }
 
@@ -113,7 +118,7 @@ public class JdbcDemo {
             conn.commit();
             System.out.println("Транзакцію зафіксовано. Створено замовлення id=" + orderId + " з однією позицією.");
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             // Будь-яка помилка -> скасовуємо ВСЮ транзакцію. Це "ROLLBACK".
             // У базі не лишиться ані замовлення, ані позиції.
             if (conn != null) {
