@@ -1,9 +1,10 @@
 spring:
+  port: 8080
   datasource:
     # Параметри збігаються з docker-compose.yml:
-    url: jdbc:postgresql://localhost:5432/shop   # jdbc:postgresql://<host>:<port>/<db>
-    username: shop
-    password: shop
+    url: ${db:jdbc:postgresql://localhost:5438/shop}   # jdbc:postgresql://<host>:<port>/<db>
+    username: ${user_name:shop}
+    password: ${user_password:shop}
 
   jpa:
     hibernate:
